@@ -2,8 +2,9 @@ import Image from 'next/image';
 
 function Header() {
   return (
-    <div>
+    <div className="flex">
       <Image
+        className="rounded-lg"
         src="https://links.papareact.com/b3z"
         width={40}
         height={40}
