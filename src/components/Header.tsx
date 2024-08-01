@@ -1,3 +1,4 @@
+import { SearchIcon } from 'lucide-react';
 import Image from 'next/image';
 
 function Header() {
@@ -10,6 +11,11 @@ function Header() {
         height={40}
         alt="logo"
       />
+      <div>
+        <form>
+          <SearchIcon />
+        </form>
+      </div>
     </div>
   );
 }
