@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 function Header() {
   return (
-    <div className="flex">
+    <div className="flex items-center p-2 max-w-6xl mx-auto">
       <Image
         className="rounded-lg"
         src="https://links.papareact.com/b3z"
