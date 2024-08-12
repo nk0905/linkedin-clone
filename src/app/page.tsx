@@ -1,3 +1,4 @@
+import PostForm from '@/components/PostForm';
 import { Button } from '@/components/ui/button';
 import UserInformation from '@/components/UserInformation';
 import Image from 'next/image';
@@ -11,12 +12,13 @@ export default function Home() {
       </section>
 
       <section className="col-span-full md:col-span-6 xl:col-span-4 xl:max-w-xl mx-auto w-full">
-        <div className="bg-red-500">hello</div>
-        {/* PostForm */}
+        <PostForm />
         {/* PostFeed */}
       </section>
 
-      <section>{/* Widget */}</section>
+      <section className="hidden xl:inline justify-center col-span-2">
+        {/* Widget */}
+      </section>
     </div>
   );
 }
