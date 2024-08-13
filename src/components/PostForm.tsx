@@ -5,12 +5,32 @@ import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { Button } from './ui/button';
 import { ImageIcon, XIcon } from 'lucide-react';
 import { useRef, useState } from 'react';
+import createPostAction from '@/actions/createPostAction';
 
 function PostForm() {
   const ref = useRef<HTMLFormElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { user } = useUser();
   const [preview, setPreview] = useState<string | null>(null);
+
+  const handlePostAction = async (formData: FormData) => {
+    const formDataCopy = formData;
+    ref.current?.reset();
+
+    const text = formData.get('postInput') as string;
+
+    if (!text.trim()) {
+      throw new Error('You must provide a post input');
+    }
+
+    setPreview(null);
+
+    try {
+      await createPostAction(formDataCopy);
+    } catch (error) {
+      console.log('Error creating post:', error);
+    }
+  };
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
