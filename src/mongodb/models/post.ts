@@ -18,7 +18,6 @@ export interface IPost extends IPostBase, Document {
 // Define the document methods (for each instance of a post)
 interface IPostMethods {
   likePost(userId: string): Promise<void>;
-  a;
   unlikePost(userId: string): Promise<void>;
   commentOnPost(comment: ICommentBase): Promise<void>;
   getAllComments(): Promise<IComment[]>;
@@ -49,3 +48,11 @@ const PostSchema = new Schema<IPostDocument>(
     timestamps: true,
   }
 );
+
+PostSchema.methods.likePost = async function (userId: string) {
+  try {
+    await this.updateOne({ $addToSet: { likes: userId } });
+  } catch (error) {
+    console.log('error when liking post', error);
+  }
+};
