@@ -56,3 +56,11 @@ PostSchema.methods.likePost = async function (userId: string) {
     console.log('error when liking post', error);
   }
 };
+
+PostSchema.methods.unlikePost = async function (userId: string) {
+  try {
+    await this.updateOne({ $pull: { likes: userId } });
+  } catch (error) {
+    console.log('error when unliking post', error);
+  }
+};
