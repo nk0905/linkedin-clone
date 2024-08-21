@@ -1,5 +1,5 @@
 import { IUser } from '@/types/user';
-import { IComment, ICommentBase } from './comment';
+import { Comment, IComment, ICommentBase } from './comment';
 import { Model, Schema } from 'mongoose';
 
 export interface IPostBase {
@@ -62,5 +62,23 @@ PostSchema.methods.unlikePost = async function (userId: string) {
     await this.updateOne({ $pull: { likes: userId } });
   } catch (error) {
     console.log('error when unliking post', error);
+  }
+};
+
+PostSchema.methods.removePost = async function () {
+  try {
+    await this.model('Post').deleteOne({ _id: this._id });
+  } catch (error) {
+    console.log('error when removing post', error);
+  }
+};
+
+PostSchema.methods.commentOnPost = async function (commentToAdd: ICommentBase) {
+  try {
+    const comment = await Comment.create(commentToAdd);
+    this.comments.push(comment._id);
+    await this.save();
+  } catch (error) {
+    console.log('error when commenting on post', error);
   }
 };
