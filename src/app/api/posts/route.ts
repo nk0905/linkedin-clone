@@ -5,3 +5,7 @@ export interface AddPostRequestBody {
   text: string;
   imageUrl?: string | null;
 }
+
+export async function POST(request: Request) {}
+
+export async function GET() {}
